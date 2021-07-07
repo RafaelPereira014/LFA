@@ -26,12 +26,12 @@
   	X => XO => O => aXd
   	X => XO => O => R
   	para n vezes:
-  	X => a^nXd^n => a^nRd^n , n>=0
+  	X =>* a^nXd^n =>* a^nRd^n , n>=0
   	
   	R => RbRc
   	R => \e ( palavra vazia)
   	para k vezes:
-  	R => * R(bc)^k => (bc)^k , k>0
+  	R =>* R(bc)^k =>*(bc)^k , k>0
   	
   	assim,
   	S => a^n(bc)^kd^n, n>=0 k>0
@@ -44,7 +44,7 @@
   	Y -> cdY | \e 
   
   (d)
-  	L = L3 + L2
+  	L = L3 . L2
   	
   	INIT: 1    |  1ºGarantir que nao ha transicoes ao estado inicial   
   	1->a->1    |  INIT: \a
