@@ -1,0 +1,158 @@
+
+1)
+
+  (a)
+  	abcd \in L3 \and abcd \in L4
+  	
+  	abcd \in L3 ( mostar que ha um caminho começando no estado inicial e percorrendo abcd)
+  	
+  	1->a->1->b->2->c->1->d->3 
+  	
+  	abcd \in L4
+  	
+  	S => X 
+  	X => XO
+  	XO => O
+  	O => aXd
+  	aXOd => aod
+  	aod => aRd 
+  	aRd => aRbRcdr => abRcd => abcd 
+  	
+  (b)
+  	L1 C L4 -> Todas as palavras de L1 também pertencem a L4 \and
+  		há pelo menos uma palavra de l4 que n pertence a L1
+  	
+  	S => X
+  	X => XO => O => aXd
+  	X => XO => O => R
+  	para n vezes:
+  	X => a^nXd^n => a^nRd^n , n>=0
+  	
+  	R => RbRc
+  	R => \e ( palavra vazia)
+  	para k vezes:
+  	R => * R(bc)^k => (bc)^k , k>0
+  	
+  	assim,
+  	S => a^n(bc)^kd^n, n>=0 k>0
+  
+  (c)
+  	S -> XYZ nao é regular
+  	
+  	S -> aS | X , onde X representa (b|c)*(cd)*
+  	X -> bX | cX | Y , onde Y represenda (cd)*
+  	Y -> cdY | \e 
+  
+  (d)
+  	L = L3 + L2
+  	
+  	INIT: 1    |  1ºGarantir que nao ha transicoes ao estado inicial   
+  	1->a->1    |  INIT: \a
+  	1->b->2    |  \a -> \e ->1
+  	1->d->3    |  1->a->1
+  	2->a->2    |  1->b->2
+  	2->c->1    |  1->d->3
+  	3->\e->2   |  ....
+  	ACC:{3}    |
+  	-----------
+  	2º garantir que o estado de aceitacao nao tem transicoes de saida
+  	\a -> \e ->1
+  	1->a->1
+  	1->b->2
+  	1->d->3
+  	....
+  	3 -> \e -> \b
+  	ACC : {\b}
+  	
+  	"eliminando o 2:"
+  	----------------
+  	1->b->2 
+  	3->\e->2      terminam ou comecam em 2
+  	2->a->2 
+  	2->c->1   
+  	
+  	INIT: \a
+  	\a->\e->1
+  	1->(a|x1)->1  onde x1 = b(a)*c
+  	1->d->3
+  	3->x2->1      onde x2 = \e(c)*c = (a)*c
+  	3->\e->\b
+  	ACC:{\b}
+  	
+  	"eliminando o 1:"
+  	----------------
+  	\a->\e->1
+  	1->(a|x1)->1 terminam ou comecam em 1
+  	1->d->3
+  	3->x2->1
+  	
+  	INIT:\a
+  	3->\e->\b
+  	\a -> X3 ->3   onde x3 = \e(a|x1)*d = (a|x1)*d
+  	3 -> x4 ->3    onde x4 = x2(a|x1)*d
+  	
+  	"eliminando o 3:"
+  	-----------------
+  	e3 = x3(x4)*\e
+  	
+  	e = e3*e2 = ((a|x1)*d)(x1(a|x1)*d)
+  	
+  
+  (e)
+  	ver se há transicoes etiquetadas com \e a partir do respetivo estado
+  	\eclosure(1) = {1} 
+  	\eclosure(2) = {2}
+  	\eclosure(3) = {2,3}
+  	
+  	Determinista eq:
+  	INIT: {1}
+  	{1}->a->{1}  
+  	{1}->b->{2}  
+  	{1}->c->{}  
+  	{1}->d->{d}  
+  	
+  	{2}->a->{2}  
+  	{2}->b->{}  
+  	{2}->c->{1}  
+  	{2}->d->{}
+  	
+  	{2,3}->a->{} \cup {2} = {2}  
+  	{2,3}->b->{}  \cup {} = {}
+  	{2,3}->c->{}  \cup {1} = {1}
+  	{2,3}->d->{d}  \cup {} = {}
+  	
+  	ACC = {2,3}
+  	Complementar da ACC: {{1},{2},{}}
+  
+  (f)
+  
+  	S -> aSd | X , onde X = (bc)*
+  	X -> bcX | bc 
+  	
+  (g)
+  	visto que X->\e|XO => follow(O) contem follow(X)
+  	por sua vez,
+  	S->X => follow(X) contem follow(S) logo $ pertence a follow(S)
+  	Assim provamos que $ pertence a follow(O)
+  	
+  (h)
+  
+  	X=>XO=>XOO=>XOOO.....=>XO^n => O^n
+  	R=>R(bRc)=>R(bRc)(bRc)=>....=>R(bRc)^n
+  	
+ 2)
+ 
+   (a)
+   	S => D =>e t L2 => e t V2 => cti = e
+   	S => D => tL1 => tL1sV1 => tV1sV2 => t i s i = e
+   	
+   (c)
+   	
+   	Z6 = {V1->i. , V2 ->i.=e}
+   	Z7 = V1->V2.}
+   	Z8 = {F->ct.L2} U {L2->.V2,L2->.L2sV2,V2->.i=e}
+   	Z9 = {L1 -> L1s.i}
+   	Z10 = \delta(Z6,=) = {V2 -> i = .e}
+   	Z11 = \delta(Z10,e) = {v2 -> i = e.}
+   	
+  	
