@@ -2,27 +2,33 @@ grammar FracLang;
 
 main: stat* EOF;
 
-stat : (display | assign)? ';'
+stat: ( assign | display )? ';' 
+;
+
+assign: ID '<=' expr
 	;
 
-assign: ID '<=' expr	
-	;
-	
-display: 'display' expr		
+display: 'display' expr
 	;
 
-expr: 	'(' expr ')'		#ExprParent
-	|op = ('-'|'+') expr 	#ExprUnary
-	|expr op=('*'|':') expr	#ExprMultDiv
-	|expr op=('+'|'-') expr	#ExprAddSub
-	|fraction		#ExprFract
-	|INTEGER		#ExprInt
-	| ID			#ExprID
+expr:	'(' expr ')' 	#ExprParents
+	|op=('+'|'-') expr #ExprUnary 	
+	|expr op=('*'|':') expr #ExprMultDiv 
+	|expr op=('+'|'-') expr #ExprSumSub
+	|fraction	#ExprFract
+	|ID		#ExprID
+	|NUM		#ExprNUM
+	|'read' STRING 	#ExprReadStr
+	|'reduce' expr  #ExprReduce
 	;
 
-fraction : INTEGER '/' INTEGER;
-ID: [a-z]+;
-INTEGER: [0-9]+;
-Comment: '--' .*? '\n' -> skip;
-WS: [ \t\n\r]+ -> skip;
+STRING:'"' .*? '"';
+fraction: NUM '/' NUM;
+VAL: ID (ID|NUM);
+ID:[a-z]+;
+NUM:[0-9]+;
+WS:[ \t\n\r]+ -> skip;
+COMMENT: '--' .*? '\n' ->skip;
 ERROR: .;
+
+

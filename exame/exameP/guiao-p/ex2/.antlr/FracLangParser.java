@@ -1,4 +1,4 @@
-// Generated from /home/parallels/Desktop/LFA/exame/emaxeP/guiao-p/ex2/FracLang.g4 by ANTLR 4.8
+// Generated from /home/parallels/Desktop/LFA2/guiao-p/ex2/FracLang.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,7 +17,8 @@ public class FracLangParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, ID=11, INTEGER=12, Comment=13, WS=14, ERROR=15;
+		T__9=10, T__10=11, T__11=12, STRING=13, VAL=14, ID=15, NUM=16, WS=17, 
+		COMMENT=18, ERROR=19;
 	public static final int
 		RULE_main = 0, RULE_stat = 1, RULE_assign = 2, RULE_display = 3, RULE_expr = 4, 
 		RULE_fraction = 5;
@@ -30,15 +31,15 @@ public class FracLangParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "';'", "'<='", "'display'", "'('", "')'", "'-'", "'+'", "'*'", 
-			"':'", "'/'"
+			null, "';'", "'<='", "'display'", "'('", "')'", "'+'", "'-'", "'*'", 
+			"':'", "'read'", "'reduce'", "'/'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, "ID", 
-			"INTEGER", "Comment", "WS", "ERROR"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, "STRING", "VAL", "ID", "NUM", "WS", "COMMENT", "ERROR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -143,11 +144,11 @@ public class FracLangParser extends Parser {
 	}
 
 	public static class StatContext extends ParserRuleContext {
-		public DisplayContext display() {
-			return getRuleContext(DisplayContext.class,0);
-		}
 		public AssignContext assign() {
 			return getRuleContext(AssignContext.class,0);
+		}
+		public DisplayContext display() {
+			return getRuleContext(DisplayContext.class,0);
 		}
 		public StatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -164,16 +165,16 @@ public class FracLangParser extends Parser {
 			setState(22);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__2:
-				{
-				setState(20);
-				display();
-				}
-				break;
 			case ID:
 				{
-				setState(21);
+				setState(20);
 				assign();
+				}
+				break;
+			case T__2:
+				{
+				setState(21);
+				display();
 				}
 				break;
 			case T__0:
@@ -282,7 +283,21 @@ public class FracLangParser extends Parser {
 		}
 		public ExprFractContext(ExprContext ctx) { copyFrom(ctx); }
 	}
-	public static class ExprAddSubContext extends ExprContext {
+	public static class ExprParentsContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ExprParentsContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ExprNUMContext extends ExprContext {
+		public TerminalNode NUM() { return getToken(FracLangParser.NUM, 0); }
+		public ExprNUMContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ExprReadStrContext extends ExprContext {
+		public TerminalNode STRING() { return getToken(FracLangParser.STRING, 0); }
+		public ExprReadStrContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ExprSumSubContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -290,13 +305,7 @@ public class FracLangParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public ExprAddSubContext(ExprContext ctx) { copyFrom(ctx); }
-	}
-	public static class ExprParentContext extends ExprContext {
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public ExprParentContext(ExprContext ctx) { copyFrom(ctx); }
+		public ExprSumSubContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprUnaryContext extends ExprContext {
 		public Token op;
@@ -304,10 +313,6 @@ public class FracLangParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public ExprUnaryContext(ExprContext ctx) { copyFrom(ctx); }
-	}
-	public static class ExprIntContext extends ExprContext {
-		public TerminalNode INTEGER() { return getToken(FracLangParser.INTEGER, 0); }
-		public ExprIntContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprMultDivContext extends ExprContext {
 		public Token op;
@@ -322,6 +327,12 @@ public class FracLangParser extends Parser {
 	public static class ExprIDContext extends ExprContext {
 		public TerminalNode ID() { return getToken(FracLangParser.ID, 0); }
 		public ExprIDContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ExprReduceContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ExprReduceContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -340,12 +351,12 @@ public class FracLangParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(43);
+			setState(47);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				{
-				_localctx = new ExprParentContext(_localctx);
+				_localctx = new ExprParentsContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
@@ -374,7 +385,7 @@ public class FracLangParser extends Parser {
 					consume();
 				}
 				setState(39);
-				expr(6);
+				expr(8);
 				}
 				break;
 			case 3:
@@ -388,25 +399,47 @@ public class FracLangParser extends Parser {
 				break;
 			case 4:
 				{
-				_localctx = new ExprIntContext(_localctx);
+				_localctx = new ExprIDContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(41);
-				match(INTEGER);
+				match(ID);
 				}
 				break;
 			case 5:
 				{
-				_localctx = new ExprIDContext(_localctx);
+				_localctx = new ExprNUMContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(42);
-				match(ID);
+				match(NUM);
+				}
+				break;
+			case 6:
+				{
+				_localctx = new ExprReadStrContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(43);
+				match(T__9);
+				setState(44);
+				match(STRING);
+				}
+				break;
+			case 7:
+				{
+				_localctx = new ExprReduceContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(45);
+				match(T__10);
+				setState(46);
+				expr(1);
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(53);
+			setState(57);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -414,16 +447,16 @@ public class FracLangParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(51);
+					setState(55);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprMultDivContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(45);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(46);
+						setState(49);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(50);
 						((ExprMultDivContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==T__7 || _la==T__8) ) {
@@ -434,35 +467,35 @@ public class FracLangParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(47);
-						expr(6);
+						setState(51);
+						expr(8);
 						}
 						break;
 					case 2:
 						{
-						_localctx = new ExprAddSubContext(new ExprContext(_parentctx, _parentState));
+						_localctx = new ExprSumSubContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(48);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(49);
-						((ExprAddSubContext)_localctx).op = _input.LT(1);
+						setState(52);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(53);
+						((ExprSumSubContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==T__5 || _la==T__6) ) {
-							((ExprAddSubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+							((ExprSumSubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(50);
-						expr(5);
+						setState(54);
+						expr(7);
 						}
 						break;
 					}
 					} 
 				}
-				setState(55);
+				setState(59);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
@@ -480,9 +513,9 @@ public class FracLangParser extends Parser {
 	}
 
 	public static class FractionContext extends ParserRuleContext {
-		public List<TerminalNode> INTEGER() { return getTokens(FracLangParser.INTEGER); }
-		public TerminalNode INTEGER(int i) {
-			return getToken(FracLangParser.INTEGER, i);
+		public List<TerminalNode> NUM() { return getTokens(FracLangParser.NUM); }
+		public TerminalNode NUM(int i) {
+			return getToken(FracLangParser.NUM, i);
 		}
 		public FractionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -496,12 +529,12 @@ public class FracLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
-			match(INTEGER);
-			setState(57);
-			match(T__9);
-			setState(58);
-			match(INTEGER);
+			setState(60);
+			match(NUM);
+			setState(61);
+			match(T__11);
+			setState(62);
+			match(NUM);
 			}
 		}
 		catch (RecognitionException re) {
@@ -525,31 +558,32 @@ public class FracLangParser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 5);
+			return precpred(_ctx, 7);
 		case 1:
-			return precpred(_ctx, 4);
+			return precpred(_ctx, 6);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21?\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\25C\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\7\2\20\n\2\f\2\16\2\23\13\2\3\2"+
 		"\3\2\3\3\3\3\5\3\31\n\3\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6.\n\6\3\6\3\6\3\6\3\6\3\6\3\6\7\6\66"+
-		"\n\6\f\6\16\69\13\6\3\7\3\7\3\7\3\7\3\7\2\3\n\b\2\4\6\b\n\f\2\4\3\2\b"+
-		"\t\3\2\n\13\2A\2\21\3\2\2\2\4\30\3\2\2\2\6\34\3\2\2\2\b \3\2\2\2\n-\3"+
-		"\2\2\2\f:\3\2\2\2\16\20\5\4\3\2\17\16\3\2\2\2\20\23\3\2\2\2\21\17\3\2"+
-		"\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\21\3\2\2\2\24\25\7\2\2\3\25\3\3\2"+
-		"\2\2\26\31\5\b\5\2\27\31\5\6\4\2\30\26\3\2\2\2\30\27\3\2\2\2\30\31\3\2"+
-		"\2\2\31\32\3\2\2\2\32\33\7\3\2\2\33\5\3\2\2\2\34\35\7\r\2\2\35\36\7\4"+
-		"\2\2\36\37\5\n\6\2\37\7\3\2\2\2 !\7\5\2\2!\"\5\n\6\2\"\t\3\2\2\2#$\b\6"+
-		"\1\2$%\7\6\2\2%&\5\n\6\2&\'\7\7\2\2\'.\3\2\2\2()\t\2\2\2).\5\n\6\b*.\5"+
-		"\f\7\2+.\7\16\2\2,.\7\r\2\2-#\3\2\2\2-(\3\2\2\2-*\3\2\2\2-+\3\2\2\2-,"+
-		"\3\2\2\2.\67\3\2\2\2/\60\f\7\2\2\60\61\t\3\2\2\61\66\5\n\6\b\62\63\f\6"+
-		"\2\2\63\64\t\2\2\2\64\66\5\n\6\7\65/\3\2\2\2\65\62\3\2\2\2\669\3\2\2\2"+
-		"\67\65\3\2\2\2\678\3\2\2\28\13\3\2\2\29\67\3\2\2\2:;\7\16\2\2;<\7\f\2"+
-		"\2<=\7\16\2\2=\r\3\2\2\2\7\21\30-\65\67";
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\62\n\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\7\6:\n\6\f\6\16\6=\13\6\3\7\3\7\3\7\3\7\3\7\2\3\n\b\2\4\6"+
+		"\b\n\f\2\4\3\2\b\t\3\2\n\13\2G\2\21\3\2\2\2\4\30\3\2\2\2\6\34\3\2\2\2"+
+		"\b \3\2\2\2\n\61\3\2\2\2\f>\3\2\2\2\16\20\5\4\3\2\17\16\3\2\2\2\20\23"+
+		"\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\21\3\2\2\2\24\25"+
+		"\7\2\2\3\25\3\3\2\2\2\26\31\5\6\4\2\27\31\5\b\5\2\30\26\3\2\2\2\30\27"+
+		"\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7\3\2\2\33\5\3\2\2\2\34\35"+
+		"\7\21\2\2\35\36\7\4\2\2\36\37\5\n\6\2\37\7\3\2\2\2 !\7\5\2\2!\"\5\n\6"+
+		"\2\"\t\3\2\2\2#$\b\6\1\2$%\7\6\2\2%&\5\n\6\2&\'\7\7\2\2\'\62\3\2\2\2("+
+		")\t\2\2\2)\62\5\n\6\n*\62\5\f\7\2+\62\7\21\2\2,\62\7\22\2\2-.\7\f\2\2"+
+		".\62\7\17\2\2/\60\7\r\2\2\60\62\5\n\6\3\61#\3\2\2\2\61(\3\2\2\2\61*\3"+
+		"\2\2\2\61+\3\2\2\2\61,\3\2\2\2\61-\3\2\2\2\61/\3\2\2\2\62;\3\2\2\2\63"+
+		"\64\f\t\2\2\64\65\t\3\2\2\65:\5\n\6\n\66\67\f\b\2\2\678\t\2\2\28:\5\n"+
+		"\6\t9\63\3\2\2\29\66\3\2\2\2:=\3\2\2\2;9\3\2\2\2;<\3\2\2\2<\13\3\2\2\2"+
+		"=;\3\2\2\2>?\7\22\2\2?@\7\16\2\2@A\7\22\2\2A\r\3\2\2\2\7\21\30\619;";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

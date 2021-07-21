@@ -1,0 +1,3 @@
+c = 100000000000000000; -- em case 2 e base 10 dentro []
+print c 
+c << 4 
